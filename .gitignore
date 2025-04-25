@@ -1,0 +1,5 @@
+# ignore raw data
+mnt/data/company_data.csv
+mnt/data/company_data_scored.csv
+# optionally ignore all data files:
+mnt/data/*.csv
