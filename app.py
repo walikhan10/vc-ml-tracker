@@ -1,3 +1,4 @@
+import math
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -285,9 +286,15 @@ with st.sidebar:
     # Only proceed if we have data
     if not companies.empty:
         # Score range
-        smin, smax = int(companies.investment_score.min()), int(companies.investment_score.max())
-        score_low, score_high = st.slider("Investment Score Range", smin, smax, (smin, smax))
-        
+        smin = math.floor(companies.investment_score.min())
+        smax = math.ceil(companies.investment_score.max())   # 91.4 → 92 (keeps everyone)
+        score_low, score_high = st.slider(
+            "Investment Score Range",
+            value=(smin, smax),
+            min_value=smin,
+            max_value=smax,
+            step=1
+)  
         # Headcount range
         if "headcount" in companies.columns:
             hmin, hmax = int(companies.headcount.min()), int(companies.headcount.max())
